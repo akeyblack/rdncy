@@ -10,7 +10,7 @@
     <div>
         <button id="createBtn" class="big-button">Create Node</button>
     </div>
-    <div class="modal" id="nodeModal">
+    <div class="modal" id="noteModal">
         <div class="modal__content">
             <span class="modal__close">&times;</span>
             <form class="modal__form">
@@ -49,8 +49,22 @@
         </table>
     </div>
     <button id="archiveBtn">Change mode</button>
+    <div class="table__wrapper">
+        <table id="statsTable" class="table table__stats">
+        <thead>
+            <tr>
+                <th>Note Category</th>
+                <th>Active</th>
+                <th>Archived</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        </table>
+    </div>
+    <script src="./storage.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./visualizer.js"></script>
     <script src="./script.js"></script>
-    <script src="./note.js"></script>
 </body>
 </html>
