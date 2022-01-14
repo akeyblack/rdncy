@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css" class="rel">
+    <title>Task 1</title>
+</head>
+<body>
+    <div>
+        <button id="createBtn" class="big-button">Create Node</button>
+    </div>
+    <div class="modal" id="nodeModal">
+        <div class="modal__content">
+            <span class="modal__close">&times;</span>
+            <form class="modal__form">
+                <input name="name" type="text">
+                <input name="content" type="text">
+                <select name="type">
+                    <option value="Task">Task</option>
+                    <option value="Random Thought">Random Thought</option>
+                    <option value="Idea">Idea</option>
+                </select>
+                <button id="mdlSubmit" type="submit">Submit</button>
+            </form>
+        </div>
+      
+    </div>
+    <div class="table__wrapper">
+        <table id="table" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Category</th>
+                <th>Content</th>
+                <th>Dates</th>
+                <th> </th>
+                <th>
+                    <img src="" alt="">
+                </th>
+                <th>
+                    <img src="" alt="">
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        </table>
+    </div>
+    <button id="archiveBtn">Change mode</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="./script.js"></script>
+    <script src="./note.js"></script>
+</body>
+</html>
