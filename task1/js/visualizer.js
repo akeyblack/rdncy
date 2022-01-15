@@ -42,9 +42,12 @@ export default class Visualizer {
     createStatsTemplate (name, active, archive) {
         return `
             <tr>
-                <td>${name}</td>
-                <td>${active}</td>
-                <td>${archive}</td>
+                <td>
+                    <i class="fas fa-${this.getIcon(name)}"></i>
+                </td>
+                <td><div>${name}</div></td>
+                <td><span>${active}</span></td>
+                <td><span>${archive}</span></td>
             </tr>
         `
     }
@@ -55,7 +58,7 @@ export default class Visualizer {
         this.table.innerHTML = "";
 
         if (items.length===0) 
-            this.table.innerHTML = "<tr>Empty</tr>"
+            this.table.innerHTML = "<tr><td>Empty</td></tr>"
     
         items.forEach((item, index) => {
             this.table.innerHTML += this.createTemplate(item, index);

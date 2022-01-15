@@ -20,7 +20,9 @@ export default class Storage {
             new Note("The theory of evolution", "The evolution...", "Random Thought"),
             new Note("New Feature", "Implement new something, 13/12/2021 , 25/12/2021", "Idea"),
             new Note("William Gaddis", "Power doesn't...", "Random Thought"),
-            new Note("Books", "The Lean Startup", "Task")
+            new Note("Books", "The Lean Startup", "Task"),
+            new Note("What if", "What if ", "Idea"),
+            new Note("Shopping List2", "Apples for 1.1.12", "Task")
         ];
         this.archive = [];
     }
