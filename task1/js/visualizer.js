@@ -1,11 +1,13 @@
-class Visualizer {
+import Storage from './storage';
+
+export default class Visualizer {
     constructor(doc) {
         this.storage = new Storage();
         
-        this.modal = doc.getElementById("noteModal");
-        this.table = doc.getElementById("table").getElementsByTagName("tbody")[0];
-        this.statsTable = doc.getElementById("statsTable").getElementsByTagName("tbody")[0];
-        this.modalForm = doc.getElementsByClassName("modal__form")[0];
+        this.modal = doc.querySelector("#noteModal");
+        this.table = doc.querySelector("#table tbody");
+        this.statsTable = doc.querySelector("#statsTable tbody");
+        this.modalForm = doc.querySelector(".modal__form");
 
         this.refresh();
     }
@@ -16,15 +18,22 @@ class Visualizer {
     createTemplate (note, index) {
         return `
             <tr>
-                <td>${note.name}</td>
-                <td>${note.created}</td>
-                <td>${note.type}</td>
-                <td>${note.content}</td>
-                <td>${note.dates}</td>
                 <td>
-                    <button onclick="vis.openUpdateModal(${index})" class="table__update-button"/>
-                    <button onclick="vis.archiveNote(${index})" class="table__archive-button"/>
-                    <button onclick="vis.deleteNote(${index})" class="table__delete-button"/>
+                    <i class="fas fa-${this.getIcon(note.type)}"></i>
+                </td>
+                <td><div>${note.name}</div></td>
+                <td><div>${note.created}</div></td>
+                <td><div>${note.type}</div></td>
+                <td><div>${note.content}</div></td>
+                <td><div>${note.dates}</div></td>
+                <td>
+                    <button onclick="vis.openUpdateModal(${index})" class="btn btn-small fas fa-pencil-alt"/>
+                </td>
+                <td>
+                    <button onclick="vis.archiveNote(${index})" class="btn btn-small btn-small_archive far fa-folder"/>
+                </td>
+                <td>
+                    <button onclick="vis.deleteNote(${index})" class="btn btn-small fas fa-trash-alt"/>
                 </td>
             </tr>
         `;
@@ -41,12 +50,12 @@ class Visualizer {
     }
 
     refresh () {
-        let items = this.isArchive ? this.storage.archive : this.storage.array;
+        let items = this.isArchive ? this.storage.getArchive() : this.storage.getArray();
 
         this.table.innerHTML = "";
 
         if (items.length===0) 
-            this.table.innerHTML = "<div>Nothing here!</div>"
+            this.table.innerHTML = "<tr>Empty</tr>"
     
         items.forEach((item, index) => {
             this.table.innerHTML += this.createTemplate(item, index);
@@ -65,7 +74,7 @@ class Visualizer {
 
     changeArchiveNote() {
         this.isArchive = !this.isArchive;
-        this.table.className = this.isArchive ? "table__content" : "table__content_archive";
+        this.table.className = this.isArchive ? "table__content_archive" : "table__content";
 
         this.refresh();
     }
@@ -111,5 +120,16 @@ class Visualizer {
     closeModal() {
         this.isCreatingNote = false;
         this.modal.style.display = "none";
+    }
+
+    getIcon(type) {
+        switch(type) {
+        case "Random Thought":
+            return "random";
+        case "Task":
+            return "tasks";
+        case "Idea":
+            return "lightbulb";
+        }
     }
 }

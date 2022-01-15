@@ -9,21 +9,30 @@ class Note {
         catch (e) {
             this.created = "Can't read date";
         }
-        this.dates = content.match(/\d{2}([\/.-])\d{2}\1\d{4}/g) || "";
+        this.dates = content.match(/(0?[1-9]|[12]\d|30|31)([\/.-])(0?[1-9]|1[0-2])([\/.-])(\d{4}|\d{2})/g) || "";
     }
 }
 
-class Storage {
+export default class Storage {
     constructor() {
         this.array = [
             new Note("Shopping List", "Tomatoes, break", "Task"),
             new Note("The theory of evolution", "The evolution...", "Random Thought"),
-            new Note("New Feature", "Implement new something, 3/5/2021, 5/5/2021", "Idea"),
+            new Note("New Feature", "Implement new something, 13/12/2021 , 25/12/2021", "Idea"),
             new Note("William Gaddis", "Power doesn't...", "Random Thought"),
             new Note("Books", "The Lean Startup", "Task")
         ];
         this.archive = [];
     }
+    
+    getArray() {
+        return [...this.array];
+    }
+
+    getArchive() {
+        return [...this.archive];
+    }
+    //just for using spread operator instead of getter
 
     addNote(name, content, type) {
         this.array.push(new Note(name, content, type)); 
