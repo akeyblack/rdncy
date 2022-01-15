@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="./styles/style.css">
+    <title>Task 1</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div>
+            <button id="createBtn" class="btn btn-big">Create Note</button>
+        </div>
+        <div class="modal" id="noteModal">
+            <div class="modal__content">
+                <span class="modal__close">&times;</span>
+                <form class="modal__form">
+                    <input placeholder="Place for name..." name="name" type="text">
+                    <input placeholder="Place for content..." name="content" type="text">
+                    <select name="type">
+                        <option value="Task">Task</option>
+                        <option value="Random Thought">Random Thought</option>
+                        <option value="Idea">Idea</option>
+                    </select>
+                    <button id="mdlSubmit" type="submit" class="btn btn-big">Submit</button>
+                </form>
+            </div>
+          
+        </div>
+        <div class="table__wrapper">
+            <table id="table" class="table">
+            <thead>
+                <tr>
+                    <th class="table__img"></th>
+                    <th>Name</th>
+                    <th>Created</th>
+                    <th>Category</th>
+                    <th>Content</th>
+                    <th>Dates</th>
+                    <th class="table__img"> </th>
+                    <th class="table__img">
+                        <i class="far fa-folder"></i>
+                    </th>
+                    <th class="table__img">
+                        <i class="far fa-trash-alt"></i>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="table__content">
+            </tbody>
+            </table>
+        </div>
+        <button id="archiveBtn" class="btn btn-big">Change mode</button>
+        <div>
+            <table id="statsTable" class="table table__stats">
+            <thead>
+                <tr>
+                    <th class="table__img"></th>
+                    <th>Note Category</th>
+                    <th class="table__img">Active</th>
+                    <th class="table__img">Archived</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/bf776ecce2.js" crossorigin="anonymous"></script>
+    <script type="module" src="./js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+</body>
+</html>
