@@ -23,7 +23,10 @@ const deFaultState = {
     ],
     archive: [],
     isArchive: false,
-    isModalActive: false
+    modalStatus: {
+        status: false,
+        callback: () => {}
+    }
 }
 
 export const reducer = (state = deFaultState, action) => {
@@ -36,12 +39,11 @@ export const reducer = (state = deFaultState, action) => {
             }
 
         case UPDATE_NOTE:
-            let oldNote = state.array[action.payload.index];
-            let newNote = new Note(action.payload.name, action.payload.content, oldNote.type, oldNote.created)
+            let newNote = new Note(action.payload.name, action.payload.content, action.payload.type, state.array[action.payload.index].created)
             return {
                 ...state,
                 array: state.array.map(
-                    (el, i) => i === action.payload ? {...el, newNote } : el
+                    (el, i) => i === action.payload.index ? newNote : el
                 )
             }
 
@@ -77,7 +79,7 @@ export const reducer = (state = deFaultState, action) => {
         case UPDATE_MODAL_STATUS:
             return {
                 ...state,
-                isModalActive: action.payload
+                modalStatus: action.payload
             }
         default:
             return state;

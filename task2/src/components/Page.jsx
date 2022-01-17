@@ -1,18 +1,19 @@
-import React, {useRef} from 'react';
+import React from 'react';
+import moment from 'moment';
 
 import Modal from './Modal';
 import Table from './Table';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import '../sass/style.scss';
-import { useDispatch } from 'react-redux';
-import { updateModalStatus, changeMode } from '../redux/actions';
+import { updateModalStatus, changeMode, addNote} from '../redux/actions';
 
 function Page() {
     const dispatch = useDispatch();
-    const {array, archive, isArchive} = useSelector(state => ({
+    const {array, archive, isArchive, modalData} = useSelector(state => ({
         array: state.array,
         archive: state.archive,
-        isArchive: state.isArchive
+        isArchive: state.isArchive,
+        modalData: state.currentModalData
     }));
 
     const thArray1 = [
@@ -23,10 +24,9 @@ function Page() {
         { text: "Content"},
         { text: "Dates"},
         { text: ""},
-        { text: ""},
         { iClass: "far fa-folder"},
         { iClass: "far fa-trash-alt"}
-    ];
+    ];  
 
     const thArray2 = [
         { text: "Note Category"},
@@ -34,8 +34,12 @@ function Page() {
         { text: "Archive", isImage: true}
     ];
 
+    const createNoteOnSubmit = (name, content, type) => {
+        dispatch(addNote(name, content, type, moment().format("LL")))
+    }
+
     const openCreateModal = () => {
-        dispatch(updateModalStatus(true));
+        dispatch(updateModalStatus(true, createNoteOnSubmit));
     }
 
     const changeActiveMode = () => {

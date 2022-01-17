@@ -17,26 +17,27 @@ export const addNote = (name, content, type, created) => ({
     }
 });
 
-export const updateNote = (index, name, content) => ({
+export const updateNote = (index, name, content, type) => ({
     type: UPDATE_NOTE,
     payload: {
         index: index,
         name: name,
-        content: content
+        content: content,
+        type: type
     }
 });
 
-export const deleteNote = (index) => ({
+export const deleteNote = index => ({
     type: DELETE_NOTE,
     payload: index
 });
 
-export const archiveNote = (index) => ({
+export const archiveNote = index => ({
     type: ARCHIVE_NOTE,
     payload: index
 });
 
-export const deArchiveNote = (index) => ({
+export const deArchiveNote = index => ({
     type: DEARCHIVE_NOTE,
     payload: index
 });
@@ -45,7 +46,10 @@ export const changeMode = () => ({
     type: CHANGE_MODE
 })
 
-export const updateModalStatus = (status) => ({
+export const updateModalStatus = (status, callbackOnSubmit) => ({
     type: UPDATE_MODAL_STATUS,
-    payload: status
+    payload: {
+        status: status,
+        callback: callbackOnSubmit
+    }
 })

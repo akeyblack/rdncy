@@ -1,25 +1,29 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {updateNote, archiveNote, deArchiveNote, deleteNote} from '../redux/actions';
+import {updateNote, archiveNote, deArchiveNote, deleteNote, updateModalStatus} from '../redux/actions';
 
 function TableRow(props) {
     const dispatch = useDispatch();
 
     const item = props.item;
 
-    const openUpdateModalHandler = () => {
+    const updateNoteOnSubmit = (name , content, type) => {
+        dispatch(updateNote(props.index, name, content, type));
+    }
 
+    const openUpdateModalHandler = () => {
+        dispatch(updateModalStatus(true, updateNoteOnSubmit));
     }
 
     const archiveNoteHandler = () => {
         if (props.isArchive)
-            dispatch(deArchiveNote(props.index))
+            dispatch(deArchiveNote(props.index));
         else
-            dispatch(archiveNote(props.index))
+            dispatch(archiveNote(props.index));
     }
 
     const deleteNoteHandler  = () => {
-        dispatch(deleteNote(props.index))
+        dispatch(deleteNote(props.index));
     }
 
     return (
