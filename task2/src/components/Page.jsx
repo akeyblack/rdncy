@@ -6,33 +6,26 @@ import Table from './Table';
 import {useSelector, useDispatch} from 'react-redux';
 import '../sass/style.scss';
 import { updateModalStatus, changeMode, addNote} from '../redux/actions';
+import { thArray1, thArray2 } from '../utils/arrays';
 
 function Page() {
     const dispatch = useDispatch();
-    const {array, archive, isArchive, modalData} = useSelector(state => ({
+    const {array, archive, isArchive} = useSelector(state => ({
         array: state.array,
         archive: state.archive,
-        isArchive: state.isArchive,
-        modalData: state.currentModalData
+        isArchive: state.isArchive
     }));
 
-    const thArray1 = [
-        { text: ""},
-        { text: "Name"},
-        { text: "Created"},
-        { text: "Category"},
-        { text: "Content"},
-        { text: "Dates"},
-        { text: ""},
-        { iClass: "far fa-folder"},
-        { iClass: "far fa-trash-alt"}
-    ];  
+    const getNumOf = (name, isActive) => {
+        let items = isActive ? array : archive;
+        return items.filter(x => x.type === name).length;
+    } 
 
-    const thArray2 = [
-        { text: "Note Category"},
-        { text: "Active", isImage: true},
-        { text: "Archive", isImage: true}
-    ];
+    const statsArray = ["Task", "Idea", "Random Thought"].map(el => ({
+        type: el,
+        active: getNumOf(el, true),
+        archive: getNumOf(el, false)
+    }));
 
     const createNoteOnSubmit = (name, content, type) => {
         dispatch(addNote(name, content, type, moment().format("LL")))
@@ -53,10 +46,10 @@ function Page() {
             </div>
             <Modal/>
             <div className="table__wrapper">
-                <Table thArray={thArray1} array={isArchive ? archive : array}/>
+                <Table thArray={thArray1} array={isArchive ? archive : array} type="" isArchive={isArchive}/>
             </div>
             <button className="btn btn-big" onClick={changeActiveMode}>Change mode</button>
-            <Table thArray={thArray2} array={[]}/>
+            <Table thArray={thArray2} array={statsArray} type="stats" isArchive={false}/>
         </div>
     );
 }

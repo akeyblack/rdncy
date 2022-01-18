@@ -7,19 +7,20 @@ class Note {
         this.content = content;
         this.type = type;
         this.created = created;
-        this.dates = content.match(/(0?[1-9]|[12]\d|30|31)([/.-])(0?[1-9]|1[0-2])([/.-])(\d{4}|\d{2})/g) || "";
+        let dates = content.match(/(0?[1-9]|[12]\d|30|31)([/.-])(0?[1-9]|1[0-2])([/.-])(\d{4}|\d{2})/g);
+        this.dates = dates ? dates.join(" ") : "";
     }
 }
 
 const deFaultState = {
     array: [
-        new Note("Shopping List", "Tomatoes, break", "Task", "16, January"),
-        new Note("The theory of evolution", "The evolution...", "Random Thought", "16, January"),
-        new Note("New Feature", "Implement new something, 13/12/2021 , 25/12/2021", "Idea", "16, January"),
-        new Note("William Gaddis", "Power doesn't...", "Random Thought", "16, January"),
-        new Note("Books", "The Lean Startup", "Task", "16, January"),
-        new Note("What if", "What if ", "Idea", "16, January"),
-        new Note("Shopping List2", "Apples for 1/1/12", "Task", "16, January")
+        new Note("Shopping List", "Tomatoes, break", "Task", "January 16, 2022"),
+        new Note("The theory of evolution", "The evolution...", "Random Thought", "January 16, 2022"),
+        new Note("New Feature", "Implement new something, 13/12/2021 , 25/12/2021", "Idea", "January 16, 2022"),
+        new Note("William Gaddis", "Power doesn't...", "Random Thought", "January 16, 2022"),
+        new Note("Books", "The Lean Startup", "Task", "January 16, 2022"),
+        new Note("What if", "What if ", "Idea", "January 16, 2022"),
+        new Note("Shopping List2", "Apples for 1/1/12", "Task", "January 16, 2022")
     ],
     archive: [],
     isArchive: false,
